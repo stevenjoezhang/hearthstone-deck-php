@@ -1,0 +1,87 @@
+.section-decklist {
+	padding: 0;
+}
+.section-decklist > * {
+	margin-left: 260px;
+	margin-right: auto;
+	padding: 40px 70px;
+	width: 241px;
+}
+.mdc-list {
+	width: 500px;
+}
+.hs-decklist .mdc-list-item {
+	float: left;
+	padding-right: 6px;
+}
+.hs-decklist-hero {
+	margin: 0 -250px;
+	position: absolute;
+}
+.hs-decklist .hs-tile-info .hs-tile-info-right {
+	right: 5px;
+}
+.preview-card {
+	overflow: visible;
+	z-index: 400;
+	left: 70px;
+	top: 150px;
+	position: fixed;
+}
+input {
+	/*pointer-events: none;*/
+}
+#main {
+	background-repeat: no-repeat;
+	background-size: 900px 100%;
+	background-image: url(../img/bg_standard.png);
+	height: 700px;
+	width: 900px;
+	transform-origin: top left;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: scroll;
+	margin-top: 40px;
+	border-radius: 20px;
+	box-shadow:0 0 15px 5px rgba(255, 255, 255, .3) inset;
+}
+.hs-decklist-hero-frame {
+	height: 101px;
+	width: 256px;
+	overflow: hidden;
+	transform-origin: top left;
+	transform: scale(0.95, 1);
+}
+body {
+	background-attachment: fixed;
+	background-image: url("../img/TheBox_Table.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: url(../img/EyeHalf.png), auto;
+	margin: 0;
+	background-color: #fff;
+	min-width: 960px
+}
+li:hover {
+	cursor: url(../img/EyeOpen.png), auto;
+}
+body:active, li:active {
+	cursor: url(../img/EyeClosed.png), auto;
+}
+@media (min-width: 960px) {
+	
+}
+@media (min-width: 640px) and (max-width: 959px) {
+	
+}
+@media (max-width: 639px) {
+	
+}
