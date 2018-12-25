@@ -7,22 +7,17 @@
 		$binary = base64_decode($deckstring);
 		$hex = bin2hex($binary);
 		$arr = str_split($hex, 2);
-		return array_map("str2int", $arr);
-	}
-	function str2int($str) {
-		return hexdec($str);
+		return array_map("hexdec", $arr);
 	}
 	function read_varint(&$data) {
 		$shift = 0;
 		$result = 0;
-		while (true) {
+		do {
 			$c = array_shift($data);
 			$result |= ($c & 0x7f) << $shift;
 			$shift += 7;
-			if (!($c & 0x80)) {
-				break;
-			}
 		}
+		while ($c & 0x80);
 		return $result;
 	}
 	function parse_deck($data) {
@@ -97,7 +92,6 @@
 	}
 	$deck[0] = $deck_cards_ordered;
 	#print_r($deck);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -108,67 +102,65 @@
 <link rel="shortcut icon" href="/favicon.ico"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg"/>
 <link rel="stylesheet" href="css/style.css"/>
-<link rel="stylesheet" href="css/theme.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HubSpot/pace@0.7.8/themes/black/pace-theme-center-circle.css"/>
-<script src="https://cdn.jsdelivr.net/gh/HubSpot/pace@0.7.8/pace.min.js"></script>  
+<link rel="stylesheet" href="fonts/fonts.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HubSpot/pace/themes/black/pace-theme-center-circle.css"/>
+<script src="https://cdn.jsdelivr.net/gh/HubSpot/pace/pace.min.js"></script>  
 </head>
 <body>
-<div id="main">
-	<section class="section-decklist">
-		<div class="hs-decklist-container">
-			<div class="hs-decklist-hero">
-				<div class="hs-decklist-hero-frame">
-					<img src="img/CustomDeck_phone-Recovered.png" class="hero-frame"/>
-					<img src="https://art.hearthstonejson.com/v1/512x/<?php echo $row["id"]; ?>.jpg" class="hero-image"/>
-				</div>
-				<div class="hs-decklist-title">
-					<input id="deck-title-input" data-deckcode="<?php echo $deckstring; ?>" type="text" class="mdc-textfield__input" value="<?php echo $name; ?>" maxlength="30"/>
-				</div>
+<section class="section-decklist">
+	<div class="hs-decklist-container">
+		<div class="hs-decklist-hero">
+			<div class="hs-decklist-hero-frame">
+				<img src="img/CustomDeck_phone-Recovered.png" class="hero-frame"/>
+				<img src="https://art.hearthstonejson.com/v1/512x/<?php echo $row["id"]; ?>.jpg" class="hero-image"/>
 			</div>
-			<ul class="mdc-list mdc-list--two-line mdc-list--avatar-list hs-decklist">
-			<?php
-				foreach ($deck_cards_ordered as $card) {
-			?>
-				<li class="mdc-list-item deck-entry deck-entry-with<?php if ($card[1] == 1 && $card[2]["rarity"] != "LEGENDARY") { echo "out"; } ?>-amount">
-					<div class="hs-tile-img">
-						<img src="https://art.hearthstonejson.com/v1/tiles/<?php echo $card[2]["id"]; ?>.png">
-					</div>
-					<div class="hs-tile-shade"></div>
-					<div class="hs-tile-borders"></div>
-					<div class="hs-tile-mana"></div>
-						<div class="hs-tile-info">
-							<span class="hs-tile-info-left mdc-list-item__start-detail" role="presentation"><?php echo $card[2]["cost"]; ?></span>
-							<span class="hs-tile-info-middle mdc-list-item__text">
-								<span><?php echo $card[2][$lang]; ?></span>
-							</span>
-							<span class="hs-tile-info-right mdc-list-item__end-detail" aria-label="Amount" title="Amount" role="presentation">
-							<?php
-								if ($card[1] == 1 && $card[2]["rarity"] == "LEGENDARY") {
-									echo '<img src="img/star.png"/>';
-								}
-								if ($card[1] != 1) {
-									echo $card[1];
-								}
-							?>
-							</span>
-						</div>
-					<div class="preview-card">
-						<?php
-							if ($lang == "zhCN") {
-								$purify_name = str_replace([" ", "'", ",", "!", ":", "-"], "", $card[2]["enUS"]);
-								echo '<img src="http://hearthstone.nos.netease.com/1/hscards/'.$card[2]["cardClass"].'__'.$card[2]["id"].'_zhCN_'.$purify_name.'.png"/>';
-							}
-							else echo '<img src="https://art.hearthstonejson.com/v1/render/latest/'.$lang.'/512x/'.$card[2]["id"].'.png"/>';
-						?>
-					</div>
-				</li>
-			<?php
-				}
-			?>
-			</ul>
+			<div class="hs-decklist-title">
+				<input id="deck-title-input" data-deckcode="<?php echo $deckstring; ?>" type="text" value="<?php echo $name; ?>" maxlength="30"/>
+			</div>
 		</div>
-	</section>
-</div>
+		<ul class="hs-decklist">
+		<?php
+			foreach ($deck_cards_ordered as $card) {
+		?>
+			<li class="deck-entry deck-entry-with<?php if ($card[1] == 1 && $card[2]["rarity"] != "LEGENDARY") { echo "out"; } ?>-amount">
+				<div class="hs-tile-img">
+					<img src="https://art.hearthstonejson.com/v1/tiles/<?php echo $card[2]["id"]; ?>.png">
+				</div>
+				<div class="hs-tile-shade"></div>
+				<div class="hs-tile-borders"></div>
+				<div class="hs-tile-mana"></div>
+				<div class="hs-tile-info">
+					<span class="hs-tile-info-left"><?php echo $card[2]["cost"]; ?></span>
+					<span class="hs-tile-info-middle">
+						<span><?php echo $card[2][$lang]; ?></span>
+					</span>
+					<span class="hs-tile-info-right">
+					<?php
+						if ($card[1] == 1 && $card[2]["rarity"] == "LEGENDARY") {
+							echo '<img src="img/star.png"/>';
+						}
+						if ($card[1] != 1) {
+							echo $card[1];
+						}
+					?>
+					</span>
+				</div>
+				<div class="preview-card">
+					<?php
+						if ($lang == "zhCN") {
+							$purify_name = str_replace([" ", "'", ",", "!", ":", "-"], "", $card[2]["enUS"]);
+							echo '<img src="http://hearthstone.nos.netease.com/1/hscards/'.$card[2]["cardClass"].'__'.$card[2]["id"].'_zhCN_'.$purify_name.'.png"/>';
+						}
+						else echo '<img src="https://art.hearthstonejson.com/v1/render/latest/'.$lang.'/512x/'.$card[2]["id"].'.png"/>';
+					?>
+				</div>
+			</li>
+		<?php
+			}
+		?>
+		</ul>
+	</div>
+</section>
 <script src="js/deck.js"></script>
 </body>
 </html>

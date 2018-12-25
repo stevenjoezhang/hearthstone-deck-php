@@ -6,7 +6,7 @@
 		newTitle = e.target.value;
 		var deckTitle = encodeURIComponent((newTitle || "").trim());
 		var deckCode = deckTitleInputEl.dataset.deckcode;
-		window.location.href = window.location.protocol + "//" + window.location.host + "/deck/?name=" + deckTitle + "&code=" + deckCode;
+		window.location.href = `${window.location.protocol}//${window.location.host}/deck/?name=${deckTitle}&code=${deckCode}`;
 	}, false);
 	var deckEntries = document.querySelectorAll(".deck-entry");
 
