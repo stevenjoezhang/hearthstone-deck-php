@@ -151,7 +151,9 @@
 							$purify_name = str_replace([" ", "'", ",", "!", ":", "-"], "", $card[2]["enUS"]);
 							echo '<img src="http://hearthstone.nos.netease.com/1/hscards/'.$card[2]["cardClass"].'__'.$card[2]["id"].'_zhCN_'.$purify_name.'.png"/>';
 						}
-						else echo '<img src="https://art.hearthstonejson.com/v1/render/latest/'.$lang.'/512x/'.$card[2]["id"].'.png"/>';
+						else {
+							echo '<img src="https://art.hearthstonejson.com/v1/render/latest/'.$lang.'/512x/'.$card[2]["id"].'.png"/>';
+						}
 					?>
 				</div>
 			</li>

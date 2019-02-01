@@ -1,15 +1,16 @@
-# Hearthstone-Deck
+# Hearthstone Deck
 
-利用Python和PHP实现的炉石传说卡组解析应用。
+利用Python和PHP实现的炉石传说卡组解析应用。请使用Python3运行。
 
 ## 使用方法
 
 ```bash
+# Clone this repository
 git clone https://github.com/stevenjoezhang/Hearthstone-Deck.git
-#克隆这个项目
+# Go into the repository
 cd Hearthstone-Deck
-pip install -r requirements.txt
-#or pip3 install -r requirements.txt
+# Install dependencies
+pip3 install -r requirements.txt
 ```
 
 首先建立MySQL数据库，并修改`deck.py`中的相关内容，使Python能够正确访问数据库。
@@ -23,3 +24,7 @@ pip install -r requirements.txt
 ## 鸣谢
 
 本项目受到了[mashirozx/Awesome-Deck](https://github.com/mashirozx/Awesome-Deck)的启发。
+
+## License
+Released under the GNU General Public License v3  
+http://www.gnu.org/licenses/gpl-3.0.html
