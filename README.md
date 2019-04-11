@@ -13,13 +13,16 @@ cd Hearthstone-Deck
 pip3 install -r requirements.txt
 ```
 
-首先建立MySQL数据库，并修改`deck.py`中的相关内容，使Python能够正确访问数据库。
+首先建立MySQL数据库，并修改`deck.py`中的相关内容，使Python能够正确访问数据库。  
+从[HearthstoneJSON](https://hearthstonejson.com/docs/cards.html)上找到最新的`cards.collectible.json`，替换掉本项目下的同名文件。  
+如果你直接点击这个网页上的链接，会跳转到一个类似于  
+https://api.hearthstonejson.com/v1/30103/enUS/cards.collectible.json  
+的网址。这里只有英文版本的卡牌描述。如果需要多语言版本，需要手动修改为：  
+https://api.hearthstonejson.com/v1/30103/all/cards.collectible.json  
+然后下载该文件并替换即可。
 
-从[HearthstoneJSON](https://hearthstonejson.com)上下载最新的`cards.collectible.json`，替换掉本项目下的同名文件。
-
-执行`deck.py`，会自动将json文件中的有用信息导入数据库。
-
-将`index.php`移到Web服务器（需支持PHP）的目录下，通过浏览器访问`index.php`即可查看效果。
+执行`deck.py`，会自动将json文件中的有用信息导入数据库。  
+将`public`目录移到Web服务器（需支持PHP）的目录下，通过浏览器访问`index.php`即可查看效果。
 
 ## 鸣谢
 
