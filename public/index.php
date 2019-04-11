@@ -1,4 +1,9 @@
 <?php
+
+	$username = "username";
+	$password = "password";
+	$dbname = "hearthstone";
+
 	@$deckstring = $_GET["code"] ? str_replace(" ", "+", $_GET["code"]) : "AAEBAaoIBJsDoxTCrgLBiQMN/gXiDP8P5hausAKlvgL4vwL5vwKW7wKm7wKMhQPzigP2igMA";
 	@$name = $_GET["name"] ? $_GET["name"] : "炉石传说卡组";
 	@$lang = $_GET["lang"] ? $_GET["lang"] : "zhCN";
@@ -58,7 +63,7 @@
 	}
 	$deck = parse_deck(parse_deckstring($deckstring));
 	$max_cost = 0;
-	$mysqli = new mysqli("127.0.0.1", "username", "password", "hearthstone");
+	$mysqli = new mysqli("127.0.0.1", $username, $password, $dbname);
 	if (mysqli_connect_errno()) {
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();

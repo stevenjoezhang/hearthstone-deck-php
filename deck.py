@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+username = "username";
+password = "password";
+dbname = "hearthstone";
+
 import json
 import pymysql
 
@@ -10,7 +14,7 @@ if __name__ == "__main__":
 	with open("cards.collectible.json", 'r') as f:
 		cards = json.load(f)
 
-	conn = pymysql.connect(host = "127.0.0.1", user = "username", password = "password", db = "hearthstone", charset = "utf8")
+	conn = pymysql.connect(host = "127.0.0.1", user = username, password = password, db = dbname, charset = "utf8")
 	print(conn)
 	cur = conn.cursor()
 
