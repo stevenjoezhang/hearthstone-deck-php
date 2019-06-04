@@ -1,3 +1,7 @@
+# Not Maintained
+
+本仓库不再维护，请转到[hsdeck](https://github.com/stevenjoezhang/hsdeck)。
+
 # Hearthstone Deck
 
 利用Python和PHP实现的炉石传说卡组解析应用。请使用Python3运行。
